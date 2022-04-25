@@ -57,5 +57,48 @@ public class Unit {
 		return output;
 	}
 	
+// Read Units
+	public String readUnit() {
+		String output = "";
+		try {
+			Connection con = connect();
+			if (con == null) {
+				return "Error while connecting to the database for reading.";
+			}
+			
+			// Creating the html table to be displayed
+			output = "<table border=\"1\"><tr><th>Unit ID</th><th>Account No</th><th>Date</th><th>Unit Amount</th><th>Price for PerUnit</th><th>Total Amount</th></tr>";
+			String query = "select * from unit1";
+			Statement stmt = (Statement) con.createStatement();
+			ResultSet rs = ((java.sql.Statement) stmt).executeQuery(query);
+			
+			// Using iteration for user details
+			while (rs.next()) {
+				String uID = Integer.toString(rs.getInt("uID"));
+				String uAccNo = rs.getString("uAccNo");
+				String uDate = rs.getString("uDate");
+				String UnitAmount = rs.getString("UnitAmount");
+				String PriceForPerUnit = rs.getString("PriceForPerUnit");
+				String Total = rs.getString("Total");
+
+				// Adding to the html table
+				output += "<tr><td>" + uID + "</td>";
+				output += "<td>" + uAccNo + "</td>";
+				output += "<td>" + uDate + "</td>";
+				output += "<td>" + UnitAmount + "</td>";
+				output += "<td>" + PriceForPerUnit + "</td>";
+				output += "<td>" + Total + "</td>";
+				
+			}
+			con.close();
+			
+			// Completing the html table
+			output += "</table>";
+		} catch (Exception e) {
+			output = "Error while reading the unit.";
+			System.err.println(e.getMessage());
+		}
+		return output;
+	}
 
 }
