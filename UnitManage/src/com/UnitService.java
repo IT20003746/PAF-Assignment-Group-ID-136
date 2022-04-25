@@ -59,4 +59,26 @@ public class UnitService {
 	 String output = UnitObj.updateUnit(uID, uAccNo, uDate, UnitAmount, PriceForPerUnit, Total);
 	return output;
 	} 
+	
+
+	@DELETE
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String deleteUnit(String unitData)
+	{
+		
+	//Converting the string input to an JSON document
+	//Document doc = Jsoup.parse(unitData, "", Parser.xmlParser());
+	//Reading the values from the element <ID>
+		//Converting the string input to a JSON object
+		 JsonObject unitObject = new JsonParser().parse(unitData).getAsJsonObject();
+		 
+		//Reading the values from the JSON object
+		 String uID = unitObject.get("uID").getAsString();
+		 
+	//String uID = doc.select("uID").text();
+	 String output = UnitObj.deleteUnit(uID);
+	return output;
+	}
 }
