@@ -28,7 +28,21 @@ public class ScheduleService {
 		return scheduleObj.readSchedule();
 	}
 
-	
+	@POST
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String insertSchedule(
+
+			
+			@FormParam("sPeriod") String sPeriod, @FormParam("sTotHrs") String sTotHrs,
+			@FormParam("sFromTime") String sFromTime, @FormParam("sToTime") String sToTime,
+			@FormParam("sArea") String sArea, @FormParam("sSub") String sSub,
+			@FormParam("sProvince") String sProvince) {
+		String output = scheduleObj.insertSchedule(sPeriod, sTotHrs, sFromTime, sToTime, sArea, sSub, sProvince);
+		return output;
+	}
+
 	
 	
 }
