@@ -25,5 +25,17 @@ public class UnitService {
 		return UnitObj.readUnit();
 	}
 	
-
+	@POST
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String insertUnit(@FormParam("uAccNo") String uAccNo,			
+	 @FormParam("uDate") String uDate,
+	 @FormParam("UnitAmount") String UnitAmount,
+	 @FormParam("PriceForPerUnit") String PriceForPerUnit,
+	 @FormParam("Total") String Total)
+	{
+	 String output = UnitObj.insertUnit (uAccNo, uDate, UnitAmount, PriceForPerUnit, Total);
+	return output;
+	}
 }
