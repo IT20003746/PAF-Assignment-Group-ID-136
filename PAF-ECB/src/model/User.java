@@ -45,7 +45,7 @@ public class User {
 				
 				
 				
-				// this is to execute the statement
+				// this is to execute the statements
 				
 				preparedStmt.execute();
 				con.close();

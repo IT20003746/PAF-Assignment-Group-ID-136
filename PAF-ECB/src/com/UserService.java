@@ -1,7 +1,6 @@
 package com;
 
 
-
 import model.User;
 
 //For REST Service
@@ -27,7 +26,8 @@ public class UserService {
 	{
 		return userObj.readUser();
 	}
-//new comments
+
+	
 	@POST
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
@@ -75,7 +75,7 @@ public class UserService {
 	@Produces(MediaType.TEXT_PLAIN) 
 	public String deleteUser(String userData) 
 	{ 
-		//Convert the input string to an XML document
+		//Convert the input string to  XML document
 		 Document doc = Jsoup.parse(userData, "", Parser.xmlParser()); 
 		 
 		//Read the value from the element <userID>
