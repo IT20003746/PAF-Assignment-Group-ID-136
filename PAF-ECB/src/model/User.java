@@ -173,7 +173,7 @@ public class User {
 			}
 			catch (Exception e)
 			{
-				output = "Error while deleting the user.";
+				output = "Error while deleting the user";
 				System.err.println(e.getMessage());
 			}
 			return output;
