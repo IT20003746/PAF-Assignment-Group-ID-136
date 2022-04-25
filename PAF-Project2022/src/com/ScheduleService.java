@@ -42,6 +42,32 @@ public class ScheduleService {
 		String output = scheduleObj.insertSchedule(sPeriod, sTotHrs, sFromTime, sToTime, sArea, sSub, sProvince);
 		return output;
 	}
+	
+
+	@PUT
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String updateSchedule(String sData) {
+		
+//Converting the input strings to a JSON object
+		
+		JsonObject scheduleObject = new JsonParser().parse(sData).getAsJsonObject();
+		
+		
+//Reading the values from the JSON object
+		
+		String sID = scheduleObject.get("sID").getAsString();
+		String sPeriod = scheduleObject.get("sPeriod").getAsString();
+		String sTotHrs = scheduleObject.get("sTotHrs").getAsString();
+		String sFromTime = scheduleObject.get("sFromTime").getAsString();
+		String sToTime = scheduleObject.get("sToTime").getAsString();
+		String sArea = scheduleObject.get("sArea").getAsString();
+		String sSub = scheduleObject.get("sSub").getAsString();
+		String sProvince = scheduleObject.get("sProvince").getAsString();
+		String output = scheduleObj.updateSchedule(sID, sPeriod, sTotHrs, sFromTime, sToTime, sArea, sSub, sProvince);
+		return output;
+	}
 
 	
 	
