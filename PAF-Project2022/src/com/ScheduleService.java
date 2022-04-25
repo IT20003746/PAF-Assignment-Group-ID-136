@@ -69,6 +69,25 @@ public class ScheduleService {
 		return output;
 	}
 
+	@DELETE
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_XML)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String deleteItem(String sData) {
+		
+		
+//Converting the input string to an XML document
+		
+		Document doc = Jsoup.parse(sData, "", Parser.xmlParser());
+		
+		
+
+//Reading the value from the element <itemID>
+		
+		String sID = doc.select("sID").text();
+		String output = scheduleObj.deleteSchedule(sID);
+		return output;
+	}
 	
 	
 }
