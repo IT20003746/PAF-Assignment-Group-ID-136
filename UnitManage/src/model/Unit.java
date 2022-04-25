@@ -100,5 +100,44 @@ public class Unit {
 		}
 		return output;
 	}
+	
+	
+//Update Units	
+	public String updateUnit(String uID, String uAccNo, String uDate, String UnitAmount, String PriceForPerUnit, String Total) {
+		String output = "";
+
+		try {
+			Connection con = connect();
+
+			if (con == null) {
+				return "Error while connecting to the database for updating.";
+			}
+
+			// Creating a prepared statement
+			String query = "UPDATE unit1 SET uAccNo=?,uDate=?,UnitAmount=?,PriceForPerUnit=?,Total=?" + "WHERE uID=?";
+
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+
+			// Binding the values
+			preparedStmt.setString(1, uAccNo);
+			preparedStmt.setString(2, uDate);
+			preparedStmt.setString(3, UnitAmount);
+			preparedStmt.setString(4, PriceForPerUnit);
+			preparedStmt.setString(5, Total);
+			preparedStmt.setInt(6, Integer.parseInt(uID));
+
+			// Executing the statement
+			preparedStmt.execute();
+			con.close();
+
+			output = "Updated successfully";
+		} catch (Exception e) {
+			output = "Error while updating the unit.";
+			System.err.println(e.getMessage());
+		}
+
+		return output;
+	}
+
 
 }
