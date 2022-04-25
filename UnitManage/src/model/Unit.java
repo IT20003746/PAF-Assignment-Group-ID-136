@@ -138,6 +138,37 @@ public class Unit {
 
 		return output;
 	}
+	
+//Delete Unit	
+	public String deleteUnit(String uID) {
+		String output = "";
 
+		try {
+			Connection con = connect();
 
+			if (con == null) {
+				return "Error while connecting to the database for deleting.";
+			}
+
+			// Creating a prepared statement
+			String query = "delete from unit1 where uID=?";
+
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+
+			// Binding the values
+			preparedStmt.setInt(1, Integer.parseInt(uID));
+
+			// Executing the statement
+			preparedStmt.execute();
+			con.close();
+
+			output = "Deleted successfully";
+		} catch (Exception e) {
+			output = "Error while deleting the unit.";
+			System.err.println(e.getMessage());
+		}
+
+		return output;
+	}
+	
 }
