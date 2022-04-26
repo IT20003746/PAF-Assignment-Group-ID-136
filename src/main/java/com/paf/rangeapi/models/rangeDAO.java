@@ -97,5 +97,77 @@ public class rangeDAO {
 
 		return output;
 	}
+	
+	public String updateRange(String rangeID, String upperLimit, String lowerLimit, String unitPrice) 
+	{
+		
+		String output = ""; 
+		
+		try
+		{ 
+			con = DBConnect.getConnection();
+			
+			if (con == null) 
+			{return "Error while connecting to the database for updating."; } 
+			
+			// create a prepared statement
+			String query = "UPDATE `range` SET `upperLimit`=?,`lowerLimit`=?,`unitPrice`=? WHERE rangeID=?";					
+			
+			PreparedStatement preparedStmt = con.prepareStatement(query); 
+			
+			// binding values
+			preparedStmt.setInt(1, Integer.parseInt(upperLimit));
+			preparedStmt.setInt(2, Integer.parseInt(lowerLimit));
+			preparedStmt.setDouble(3, Double.parseDouble(unitPrice));
+			preparedStmt.setInt(4, Integer.parseInt(rangeID));
+			
+			// execute the statement
+			preparedStmt.execute(); 
+			con.close(); 
+			
+			output = "Updated successfully"; 
+		 } 
+		 catch (Exception e) 
+		 { 
+			 output = "Error while updating the item."; 
+			 System.err.println(e.getMessage()); 
+		 } 
+		
+		return output;
+	}
+	
+	public String deleteRange(String resourceID)
+	{ 
+		String output = ""; 
+		
+		try
+		{ 
+			con = DBConnect.getConnection();
+			
+			if (con == null) 
+			{return "Error while connecting to the database for deleting."; } 
+			
+			// create a prepared statement
+			String query = "DELETE FROM `range` WHERE rangeID=?"; 
+			
+			PreparedStatement preparedStmt = con.prepareStatement(query); 
+			
+			// binding values
+			preparedStmt.setInt(1, Integer.parseInt(resourceID)); 
+			
+			// execute the statement
+			preparedStmt.execute(); 
+			con.close(); 
+			
+			output = "Deleted successfully"; 
+		} 
+		catch (Exception e) 
+		{ 
+		 	output = "Error while deleting the item."; 
+		 	System.err.println(e.getMessage()); 
+		} 
+		
+		return output; 
+	 }
 
 }
